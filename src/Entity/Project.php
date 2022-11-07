@@ -9,10 +9,14 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use Symfony\Component\Serializer\Annotation\Groups;
+
 
 #[ORM\Entity(repositoryClass: ProjectRepository::class)]
-#[ApiResource]
+/**
+ * @ApiResource(
+ * itemOperations={"get", "patch"})
+ */
+
 class Project
 {
     #[ORM\Id]

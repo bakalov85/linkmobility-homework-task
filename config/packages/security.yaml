@@ -1,4 +1,6 @@
 security:
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_USER]
     enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
@@ -19,7 +21,7 @@ security:
                 success_handler: lexik_jwt_authentication.handler.authentication_success
                 failure_handler: lexik_jwt_authentication.handler.authentication_failure
         api:
-            pattern:   ^/jwt
+            pattern:   ^/api
             stateless: true
             jwt: ~
         dev:
@@ -39,7 +41,11 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         - { path: ^/jwt/login, roles: PUBLIC_ACCESS }
-        - { path: ^/jwt,       roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/projects, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/tasks, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api, roles: PUBLIC_ACCESS } # Allows accessing API documentations and Swagger UI
+        
+        
         # - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 

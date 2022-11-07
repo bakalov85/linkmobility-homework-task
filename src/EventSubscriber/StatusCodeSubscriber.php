@@ -24,7 +24,7 @@ final class StatusCodeSubscriber implements EventSubscriberInterface
         $statusCode = $response->getStatusCode();
         $content = json_decode($response->getContent());
 
-        if ($statusCode >= 300) {
+        if (json_last_error() === JSON_ERROR_NONE && $statusCode >= 300) {
             $response->setStatusCode(200);
             $content->code = $statusCode;
             $response->setContent(json_encode($content));

@@ -5,8 +5,7 @@ api_platform:
         json: ['application/merge-patch+json']
     swagger:
         versions: [3]
-    exception_to_status:
-        \Exception: 200
-        Symfony\Component\Serializer\Exception\ExceptionInterface: 200 # Use a raw status code (recommended)
-        ApiPlatform\Exception\InvalidArgumentException: 200
-        ApiPlatform\Exception\FilterValidationException: 200
+        api_keys:
+             JWT:
+                name: Authorization
+                type: header
